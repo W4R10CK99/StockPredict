@@ -9,7 +9,7 @@ st.title('Stock Trend Predictor')
 
 
 start = '2010-01-01'
-end = '2020-12-31'
+end = '2022-12-31'
 
 user_input = st.text_input('Enter Stock Ticker','AAPL')
 
@@ -17,7 +17,7 @@ df = yf.download(user_input,start=start,end=end)
 
 #describing data
 
-st.subheader('Data from 2010 - 2020')
+st.subheader('Data from 2010 - 2022')
 st.write(df.describe())
 
 #visualisation
@@ -47,26 +47,12 @@ data_test = pd.DataFrame(df['Close'][int(len(df)*0.70):])
 from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler(feature_range=(0,1))
 
-data_train_scaled = scaler.fit_transform(data_train)
-
-
-# splitting the data into training and testing 
-x_train = []
-y_train = []
-
-for i in range(100,data_train_scaled.shape[0]):
-    x_train.append(data_train_scaled[i-100 : i])
-    y_train.append(data_train_scaled[i, 0])
-    
-x_train = np.array(x_train)
-y_train = np.array(y_train)
-
 #load the trained model
 model = load_model('keras_model.h5')
 
 
 past_100_days = data_train.tail(100)
-final_df = past_100_days.append(data_test, ignore_index=True)
+final_df = pd.concat([past_100_days, data_test], ignore_index=True)
 input_data = scaler.fit_transform(final_df)
 
 x_test = []
@@ -93,7 +79,5 @@ st.subheader('Prediction vs Original')
 fig2 = plt.figure(figsize = (12,6))
 plt.plot(y_test,'b',label='Original Price')
 plt.plot(y_predicted,'r',label='Predicted Price')
-plt.xlabel('Time')
-plt.ylabel('Price')
 plt.legend()
-st.pyplot(fig)
+st.pyplot(fig2)

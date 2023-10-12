@@ -11,13 +11,15 @@ start = '2010-01-01'
 end = '2022-12-31'
 
 matching_stock = False
-available_lists = ["None", "AAPL", "SBIN.NS", "GOOGL", "TSLA"]
-
+try:
+    available_lists = pd.read_csv('Ticker.csv')['Ticker'].tolist()
+except FileNotFoundError:
+    available_lists = ["NONE", "TCS.NS", "TATAMOTORS.NS", "TATASTEEL.NS", "TITAN.NS", "AAL", "AAON", "ABNB", "ABT", "ADBE", "AMZN", "NVDA", "MCD", "SONY", "SMSN.IL", "AAPL", "SBIN.NS", "GOOGL", "TSLA"]
 # Create a drop-down box to select from available lists
 selected_ticker = st.selectbox("Select From Stock Ticker", available_lists)
 
 # Display the selected ticker if one is chosen
-if selected_ticker != "None":
+if selected_ticker != "NONE":
     st.write("You selected:", selected_ticker)
 
     df = yf.download(selected_ticker, start=start, end=end)
@@ -26,10 +28,9 @@ if selected_ticker != "None":
     # Now you can use df for further analysis or visualization of the selected stock data.
 
 else:
-    st.write("Or Provide Stock Ticker")
 
     # Allow users to manually input the stock ticker
-    entered_ticker = st.text_input('Enter Stock Ticker')
+    entered_ticker = st.text_input('Or Provide Stock Ticker')
 
     if entered_ticker:
         try:
@@ -43,7 +44,7 @@ else:
 #describing data
 
 if matching_stock==False:
-    st.write("No data available for the selected stock ticker.")
+    st.write("Enter Valid Ticker")
 
 else:
     st.subheader('Data from 2010 - 2022')

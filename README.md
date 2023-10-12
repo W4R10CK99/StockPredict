@@ -2,6 +2,9 @@
 
 A Streamlit web application for predicting stock trends and visualizing stock data.
 
+## Demo
+<a href="https://stockml.streamlit.app/" target="_blank">Stock Predict App</a>
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -9,7 +12,6 @@ A Streamlit web application for predicting stock trends and visualizing stock da
 - [Demo](#demo)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Overview
@@ -22,10 +24,6 @@ The "Stock Trend Predictor" is a Streamlit-based web application that allows use
 - View historical stock data and key statistics.
 - Visualize stock data using interactive charts.
 - Make stock price predictions with a pre-trained machine learning model.
-
-## Demo
-
-[View Demo](https://stockml.streamlit.app/) (Add a link to your live Streamlit app if available.)
 
 ## Getting Started
 
@@ -74,7 +72,6 @@ git push origin feature/new-feature
 5. Create a pull request on the original repository's main branch.
 
 6. Wait for review and approval from the maintainers.
-
 
 ## License
 This project is licensed under the MIT License.
